@@ -9,7 +9,7 @@ source:
   sha256: d9dc32efba7e74f788fcc4f212a43216fc37cf5f23f4c2339664d473353aedf6
 
 build:
-  number: 0
+  number: 1
   skip: True  # [win and py36]
   features:
     - vc9  # [win and py27]
@@ -22,6 +22,8 @@ requirements:
     - msinttypes  # [win]
     - vc 9  # [win and py27]
     - vc 14  # [win and (py35 or py36)]
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
   run:
     - vc 9  # [win and py27]
     - vc 14  # [win and (py35 or py36)]
@@ -43,3 +45,4 @@ extra:
     - kwilcox
     - ocefpaf
     - pelson
+    - mingwandroid
