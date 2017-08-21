@@ -26,7 +26,6 @@ requirements:
     - cmake  # [win]
     - msinttypes  # [win and vc<14]
     - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
 
 test:
   commands:
