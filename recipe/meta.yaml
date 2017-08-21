@@ -13,27 +13,20 @@ source:
     utf8.patch
 
 build:
-  number: 1
-  skip: True  # [win and py36]
+  number: 2
   features:
-    - vc9  # [win and py27]
-    - vc10  # [win and py34]
-    - vc14  # [win and (py35 or py36)]
+    - vc{{ vc }}  # [win]
+  run_exports:
+    # changes SONAME at major rev.  Default behavior OK.
+    #   https://abi-laboratory.pro/tracker/timeline/expat/
+    - {{ pin_subpackage('expat') }}
 
 requirements:
   build:
-    - python  # [win]
     - cmake  # [win]
-    - msinttypes  # [win]
-    - vc 9  # [win and py27]
-    - vc 10  # [win and py34]
-    - vc 14  # [win and (py35 or py36)]
+    - msinttypes  # [win and vc<14]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-  run:
-    - vc 9  # [win and py27]
-    - vc 10  # [win and py34]
-    - vc 14  # [win and (py35 or py36)]
 
 test:
   commands:
@@ -53,3 +46,4 @@ extra:
     - ocefpaf
     - pelson
     - mingwandroid
+    - msarahan
