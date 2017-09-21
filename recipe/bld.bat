@@ -3,6 +3,9 @@ set LIB=%LIBRARY_LIB%;%LIB%
 set LIBPATH=%LIBRARY_LIB%;%LIBPATH%
 set INCLUDE=%LIBRARY_INC%;%INCLUDE%
 
+set CFLAGS=
+set CXXFLAGS=
+
 :: VS2008 doesn't have stdbool.h so copy in our own
 :: to 'lib' where the other headers are so it gets picked up.
 if "%VS_MAJOR%" == "9" (
