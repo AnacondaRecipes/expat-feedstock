@@ -13,9 +13,7 @@ source:
     utf8.patch
 
 build:
-  number: 2
-  features:
-    - vc{{ vc }}  # [win]
+  number: 3
   run_exports:
     # changes soname at major versions, default settings OK
     #    https://abi-laboratory.pro/tracker/timeline/expat/
