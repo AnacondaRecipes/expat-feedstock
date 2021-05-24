@@ -20,6 +20,7 @@ requirements:
   build:
     - cmake  # [win]
     - make  # [unix]
+    - libtool  # [unix]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
@@ -35,6 +36,7 @@ about:
   license_family: MIT
   license_file: COPYING
   summary: 'Expat XML parser library in C'
+  dev_url: https://github.com/libexpat/libexpat
 
 extra:
   recipe-maintainers:
