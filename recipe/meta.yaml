@@ -1,4 +1,4 @@
-{% set version = "2.4.1" %}
+{% set version = "2.4.3" %}
 {% set ver = version|replace(".", "_") %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/libexpat/libexpat/releases/download/R_{{ ver }}/expat-{{ version }}.tar.bz2
-  sha256: 2f9b6a580b94577b150a7d5617ad4643a4301a6616ff459307df3e225bcfbf40
+  sha256: 6f262e216a494fbf42d8c22bc841b3e117c21f2467a19dc4c27c991b5622f986
 
 build:
   number: 2
