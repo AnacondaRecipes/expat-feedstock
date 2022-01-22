@@ -15,7 +15,7 @@ build:
     # changes soname at major versions, default settings OK
     # https://abi-laboratory.pro/tracker/timeline/expat/
     - {{ pin_subpackage('expat') }}
-
+  skip: true   #[s390x or aarch64]
 requirements:
   build:
     - cmake  # [win]
