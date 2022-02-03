@@ -31,7 +31,7 @@ test:
     - xmlwf -h
 
 about:
-  home: https://expat.sourceforge.net/
+  home: http://expat.sourceforge.net/
   license: MIT
   license_family: MIT
   license_file: COPYING
