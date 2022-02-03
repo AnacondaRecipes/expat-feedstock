@@ -34,7 +34,7 @@ about:
   home: http://expat.sourceforge.net/
   license: MIT
   license_family: MIT
-  license_file: COPYING
+  license_file: expat/COPYING
   summary: 'Expat XML parser library in C'
   dev_url: https://github.com/libexpat/libexpat
   doc_url: https://github.com/libexpat/libexpat/tree/master/expat/doc
