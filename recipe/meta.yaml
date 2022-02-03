@@ -31,10 +31,11 @@ test:
     - xmlwf -h
 
 about:
-  home: http://expat.sourceforge.net/
+  home: https://libexpat.github.io
   license: MIT
   license_family: MIT
-  license_file: expat/COPYING
+  # Note that the file is in a subdirectory expat/COPYING the expat is in a subdirectory
+  license_file: COPYING
   summary: 'Expat XML parser library in C'
   dev_url: https://github.com/libexpat/libexpat
   doc_url: https://github.com/libexpat/libexpat/tree/master/expat/doc
