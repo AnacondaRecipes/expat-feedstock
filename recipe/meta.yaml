@@ -1,4 +1,4 @@
-{% set version = "2.4.1" %}
+{% set version = "2.4.4" %}
 {% set ver = version|replace(".", "_") %}
 
 package:
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://github.com/libexpat/libexpat/releases/download/R_{{ ver }}/expat-{{ version }}.tar.bz2
-  sha256: 2f9b6a580b94577b150a7d5617ad4643a4301a6616ff459307df3e225bcfbf40
+  sha256: 14c58c2a0b5b8b31836514dfab41bd191836db7aa7b84ae5c47bc0327a20d64a
 
 build:
-  number: 2
+  number: 0
   run_exports:
     # changes soname at major versions, default settings OK
     # https://abi-laboratory.pro/tracker/timeline/expat/
@@ -31,12 +31,14 @@ test:
     - xmlwf -h
 
 about:
-  home: http://expat.sourceforge.net/
+  home: https://libexpat.github.io
   license: MIT
   license_family: MIT
+  # Note that the file is in a subdirectory expat/COPYING the expat is in a subdirectory
   license_file: COPYING
   summary: 'Expat XML parser library in C'
   dev_url: https://github.com/libexpat/libexpat
+  doc_url: https://github.com/libexpat/libexpat/tree/master/expat/doc
 
 extra:
   recipe-maintainers:
