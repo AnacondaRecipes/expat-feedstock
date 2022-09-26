@@ -1,4 +1,4 @@
-{% set version = "2.4.4" %}
+{% set version = "2.4.9" %}
 {% set ver = version|replace(".", "_") %}
 
 package:
@@ -34,11 +34,12 @@ about:
   home: https://libexpat.github.io
   license: MIT
   license_family: MIT
-  # Note that the file is in a subdirectory expat/COPYING the expat is in a subdirectory
   license_file: COPYING
-  summary: 'Expat XML parser library in C'
+  license_url: https://github.com/libexpat/libexpat/blob/master/expat/COPYING
+  summary: Expat XML parser library in C
   dev_url: https://github.com/libexpat/libexpat
-  doc_url: https://github.com/libexpat/libexpat/tree/master/expat/doc
+  doc_url: https://libexpat.github.io/doc/
+  doc_source_url: https://github.com/libexpat/libexpat/tree/master/expat/doc
 
 extra:
   recipe-maintainers:
