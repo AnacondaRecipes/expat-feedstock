@@ -1,4 +1,4 @@
-{% set version = "2.4.9" %}
+{% set version = "2.5.0" %}
 {% set ver = version|replace(".", "_") %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/libexpat/libexpat/releases/download/R_{{ ver }}/expat-{{ version }}.tar.bz2
-  sha256: 7f44d1469b110773a94b0d5abeeeffaef79f8bd6406b07e52394bcf48126437a
+  sha256: 6f0e6e01f7b30025fa05c85fdad1e5d0ec7fd35d9f61b22f34998de11969ff67
 
 build:
   number: 0
@@ -23,8 +23,6 @@ requirements:
     - libtool  # [unix]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-  host:
-    - msinttypes  # [win and vc<14]
 
 test:
   commands:
@@ -35,11 +33,13 @@ about:
   license: MIT
   license_family: MIT
   license_file: COPYING
-  license_url: https://github.com/libexpat/libexpat/blob/master/expat/COPYING
   summary: Expat XML parser library in C
+  description: |
+    Expat is a stream-oriented XML parser library written in C.
+    Expat excels with files too large to fit RAM, and where performance 
+    and flexibility are crucial.
   dev_url: https://github.com/libexpat/libexpat
   doc_url: https://libexpat.github.io/doc/
-  doc_source_url: https://github.com/libexpat/libexpat/tree/master/expat/doc
 
 extra:
   recipe-maintainers:
