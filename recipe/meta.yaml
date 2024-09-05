@@ -1,4 +1,4 @@
-{% set version = "2.6.2" %}
+{% set version = "2.6.3" %}
 {% set ver = version|replace(".", "_") %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/libexpat/libexpat/releases/download/R_{{ ver }}/expat-{{ version }}.tar.bz2
-  sha256: 9c7c1b5dcbc3c237c500a8fb1493e14d9582146dd9b42aa8d3ffb856a3b927e0
+  sha256: b8baef92f328eebcf731f4d18103951c61fa8c8ec21d5ff4202fb6f2198aeb2d
 
 build:
   number: 0
@@ -36,7 +36,7 @@ about:
   summary: Expat XML parser library in C
   description: |
     Expat is a stream-oriented XML parser library written in C.
-    Expat excels with files too large to fit RAM, and where performance 
+    Expat excels with files too large to fit RAM, and where performance
     and flexibility are crucial.
   dev_url: https://github.com/libexpat/libexpat
   doc_url: https://libexpat.github.io/doc/
