@@ -22,6 +22,7 @@ requirements:
     - make  # [unix]
     - libtool  # [unix]
     - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
 
 test:
   commands:
