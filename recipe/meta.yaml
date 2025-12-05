@@ -50,8 +50,11 @@ outputs:
       run_constrained:
         - {{ name }} {{ version }}.*
     test:
+      requires:
+        - pkg-config
       commands:
         - ls $PREFIX/lib/libexpat*${SHLIB_EXT}* > /dev/null 2>&1  # [unix]
+        - pkg-config --libs expat                                 # [unix]
         - if not exist %LIBRARY_BIN%\libexpat.dll exit 1          # [win]
 
   - name: {{ name }}
