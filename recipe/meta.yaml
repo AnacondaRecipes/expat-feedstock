@@ -10,7 +10,7 @@ source:
   sha256: 59c31441fec9a66205307749eccfee551055f2d792f329f18d97099e919a3b2f
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
@@ -28,9 +28,15 @@ outputs:
       # https://abi-laboratory.pro/tracker/timeline/expat/
       - {{ pin_subpackage('lib' + name) }}
     files:
-      - lib/libexpat.so.*          # [linux]
-      - lib/libexpat.*.dylib       # [osx]
-      - Library/bin/libexpat.dll   # [win]
+      - include                  # [unix]
+      - lib/libexpat.*           # [unix]
+      - lib/cmake                # [unix]
+      - lib/pkgconfig            # [unix]
+      - share/doc                # [unix]
+      - Library/bin/*expat.dll   # [win]
+      - Library/include          # [win]
+      - Library/lib              # [win]
+      - Library/share/doc        # [win]
     requirements:
       build:
         - {{ stdlib('c') }}
@@ -54,8 +60,10 @@ outputs:
       # https://abi-laboratory.pro/tracker/timeline/expat/
       - {{ pin_subpackage(name) }}
     files:
-      - bin/xmlwf              # [unix]
-      - Library/bin/xmlwf.exe  # [win]
+      - bin                   # [unix]
+      - share/man             # [unix]
+      - Library/bin/*.exe     # [win]
+      - Library/share/man     # [win]
     requirements:
       build:
         - {{ stdlib('c') }}
