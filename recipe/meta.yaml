@@ -1,20 +1,16 @@
+{% set name = "expat" %}
 {% set version = "2.7.3" %}
-{% set ver = version|replace(".", "_") %}
 
 package:
-  name: expat
+  name: {{ name }}-split
   version: {{ version }}
 
 source:
-  url: https://github.com/libexpat/libexpat/releases/download/R_{{ ver }}/expat-{{ version }}.tar.bz2
+  url: https://github.com/lib{{ name }}/lib{{ name }}/releases/download/R_{{ version|replace(".", "_") }}/{{ name }}-{{ version }}.tar.bz2
   sha256: 59c31441fec9a66205307749eccfee551055f2d792f329f18d97099e919a3b2f
 
 build:
-  number: 0
-  run_exports:
-    # changes soname at major versions, default settings OK
-    # https://abi-laboratory.pro/tracker/timeline/expat/
-    - {{ pin_subpackage('expat') }}
+  number: 1
 
 requirements:
   build:
@@ -25,9 +21,56 @@ requirements:
     - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
 
-test:
-  commands:
-    - xmlwf -h
+outputs:
+  - name: lib{{ name }}
+    run_exports:
+      # changes soname at major versions, default settings OK
+      # https://abi-laboratory.pro/tracker/timeline/expat/
+      - {{ pin_subpackage('lib' + name) }}
+    files:
+      - lib/libexpat.so.*          # [linux]
+      - lib/libexpat.*.dylib       # [osx]
+      - Library/bin/libexpat.dll   # [win]
+    requirements:
+      build:
+        - {{ stdlib('c') }}
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+        - cmake  # [win]
+        - make  # [unix]
+        - libtool  # [unix]
+      host:
+      run:
+      run_constrained:
+        - {{ name }} {{ version }}.*
+    test:
+      commands:
+        - ls $PREFIX/lib/libexpat*${SHLIB_EXT}* > /dev/null 2>&1  # [unix]
+        - if not exist %LIBRARY_BIN%\libexpat.dll exit 1          # [win]
+
+  - name: {{ name }}
+    run_exports:
+      # changes soname at major versions, default settings OK
+      # https://abi-laboratory.pro/tracker/timeline/expat/
+      - {{ pin_subpackage(name) }}
+    files:
+      - bin/xmlwf              # [unix]
+      - Library/bin/xmlwf.exe  # [win]
+    requirements:
+      build:
+        - {{ stdlib('c') }}
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+        - cmake  # [win]
+        - make  # [unix]
+        - libtool  # [unix]
+      host:
+        - {{ pin_subpackage('lib' + name, exact=True) }}
+      run:
+        - {{ pin_subpackage('lib' + name, exact=True) }}
+    test:
+      commands:
+        - xmlwf -h
 
 about:
   home: https://libexpat.github.io
