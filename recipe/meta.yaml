@@ -33,13 +33,13 @@ outputs:
       - lib/cmake                # [unix]
       - lib/pkgconfig            # [unix]
       - share/doc                # [unix]
-      - Library/bin/*.dll        # [win]
+      - Library/bin/*expat.dll   # [win]
       - Library/include          # [win]
       - Library/lib              # [win]
       - Library/share/doc        # [win]
-    build:                                     # [win]
-      missing_dso_whitelist:                   # [win]
-        - "$RPATH/api-ms-win-core-winrt-*.dll" # [win]
+    # build:                                     # [win]
+    #   missing_dso_whitelist:                   # [win]
+    #     - "$RPATH/api-ms-win-core-winrt-*.dll" # [win]
     requirements:
       build:
         - {{ stdlib('c') }}
