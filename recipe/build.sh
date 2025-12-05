@@ -1,12 +1,21 @@
 #!/bin/bash
 
-./configure --prefix=$PREFIX \
-            --host=${HOST} \
-            --build=${BUILD}
+# Configure using CMake
+cmake -G "Ninja" \
+      $CMAKE_ARGS \
+      -DEXPAT_BUILD_TOOLS=ON \
+      -DEXPAT_BUILD_PKGCONFIG=ON \
+      -DEXPAT_BUILD_TESTS=ON \
+      -DEXPAT_BUILD_EXAMPLES=OFF \
+      -DEXPAT_BUILD_DOCS=OFF \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DBUILD_SHARED_LIBS=ON \
+      -DCMAKE_INSTALL_PREFIX=$PREFIX \
+      -S $SRC_DIR \
+      -B build
 
-make -j${CPU_COUNT} ${VERBOSE_AT}
-make check
-make install
+# Build and install
+cmake --build build --config Release --parallel $CPU_COUNT --target install
 
-# We can remove this when we start using the new conda-build.
-find $PREFIX -name '*.la' -delete
+# Run tests
+ctest -C Release --test-dir build
