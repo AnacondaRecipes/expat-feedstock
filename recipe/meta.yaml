@@ -37,6 +37,9 @@ outputs:
       - Library/include          # [win]
       - Library/lib              # [win]
       - Library/share/doc        # [win]
+    build:                                     # [win]
+      missing_dso_whitelist:                   # [win]
+        - "$RPATH/api-ms-win-core-winrt-*.dll" # [win]
     requirements:
       build:
         - {{ stdlib('c') }}
