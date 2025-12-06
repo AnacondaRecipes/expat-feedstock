@@ -10,16 +10,15 @@ source:
   sha256: 59c31441fec9a66205307749eccfee551055f2d792f329f18d97099e919a3b2f
 
 build:
-  number: 3
+  number: 4
 
 requirements:
   build:
-    - cmake  # [win]
-    - make  # [unix]
-    - libtool  # [unix]
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
-    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
+    - cmake
+    - ninja-base
 
 outputs:
   - name: lib{{ name }}
@@ -39,23 +38,24 @@ outputs:
       - share/doc                # [unix]
       - Library/bin/*expat.dll   # [win]
       - Library/include          # [win]
-      - Library/lib              # [win]
+      - Library/lib/*expat.lib   # [win]
+      - Library/lib/cmake        # [win]
       - Library/share/doc        # [win]
     requirements:
       build:
         - {{ stdlib('c') }}
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
-        - cmake  # [win]
-        - make  # [unix]
-        - libtool  # [unix]
       host:
       run:
       run_constrained:
         - {{ name }} {{ version }}.*
     test:
+      requires:
+        - pkg-config
       commands:
         - ls $PREFIX/lib/libexpat*${SHLIB_EXT}* > /dev/null 2>&1  # [unix]
+        - pkg-config --libs expat                                 # [unix]
         - if not exist %LIBRARY_BIN%\libexpat.dll exit 1          # [win]
 
   - name: {{ name }}
@@ -77,9 +77,6 @@ outputs:
         - {{ stdlib('c') }}
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
-        - cmake  # [win]
-        - make  # [unix]
-        - libtool  # [unix]
       host:
         - {{ pin_subpackage('lib' + name, exact=True) }}
       run:
