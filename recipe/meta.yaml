@@ -38,7 +38,8 @@ outputs:
       - share/doc                # [unix]
       - Library/bin/*expat.dll   # [win]
       - Library/include          # [win]
-      - Library/lib              # [win]
+      - Library/lib/*expat.lib   # [win]
+      - Library/lib/cmake        # [win]
       - Library/share/doc        # [win]
     requirements:
       build:
