@@ -11,23 +11,26 @@ if "%VS_MAJOR%" == "9" (
 )
 
 :: set cflags because NDEBUG is set in Release configuration, which errors out in test suite due to no assert
-cmake -G "NMake Makefiles" ^
+cmake -G "Ninja" ^
       -D CMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
       -D CMAKE_C_FLAGS_RELEASE="%CFLAGS%" ^
       -D CMAKE_CXX_FLAGS_RELEASE="%CXXFLAGS%" ^
-      -D CMAKE_BUILD_TYPE=Release
-      %SRC_DIR%
+      -D CMAKE_BUILD_TYPE=Release ^
+      -D EXPAT_BUILD_TOOLS=ON ^
+      -D EXPAT_BUILD_PKGCONFIG=OFF ^
+      -D EXPAT_BUILD_TESTS=ON ^
+      -D EXPAT_BUILD_EXAMPLES=OFF ^
+      -D EXPAT_BUILD_DOCS=OFF ^
+      -D BUILD_SHARED_LIBS=ON ^
+      -S %SRC_DIR% ^
+      -B build
 
-:: Build.
-cmake --build . --config Release
-if errorlevel 1 exit 1
-
-:: Install.
-cmake --build . --config Release --target install
+:: Build and install.
+cmake --build build --config Release --parallel %CPU_COUNT% --target install
 if errorlevel 1 exit 1
 
 :: Test.
-ctest -C Release
+ctest -C Release --test-dir build
 if errorlevel 1 exit 1
 
 :: Workaround for package that got build with latet version that renamed these.
