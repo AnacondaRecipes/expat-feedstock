@@ -8,9 +8,6 @@ package:
 source:
   url: https://github.com/lib{{ name }}/lib{{ name }}/releases/download/R_{{ version|replace(".", "_") }}/{{ name }}-{{ version }}.tar.bz2
   sha256: 69e7f52417d85b1c2b7fe855e176eec55d0b2d7d92d691372d833a1c7df7923b
-  patches:
-    # Add missing symbol on Windows (conda-forge/expat-feedstock#71, upstream 3cdd1df)
-    - patches/0001-windows-export-xml-sethashsalt16bytes.patch
 
 build:
   number: 1
