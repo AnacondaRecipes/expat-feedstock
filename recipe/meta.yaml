@@ -10,7 +10,7 @@ source:
   sha256: 952c03c33a6b337f12dae7a9b0f9dee86f867550d35c994d6bdaaddd37dc8454
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
@@ -22,10 +22,11 @@ requirements:
 
 outputs:
   - name: lib{{ name }}
-    ignore_run_exports_from:
-      # This package needs the compiler for the tests, but the library
-      # does not link to libstdc++.so
-      - {{ compiler('cxx') }}
+    build:
+      ignore_run_exports_from:
+       # This package needs the compiler for the tests, but the library
+       # does not link to libstdc++.so
+        - {{ compiler('cxx') }}
     run_exports:
       # changes soname at major versions, default settings OK
       # https://abi-laboratory.pro/tracker/timeline/expat/
@@ -59,10 +60,11 @@ outputs:
         - if not exist %LIBRARY_BIN%\libexpat.dll exit 1          # [win]
 
   - name: {{ name }}
-    ignore_run_exports_from:
-      # This package needs the compiler for the tests, but the library
-      # does not link to libstdc++.so
-      - {{ compiler('cxx') }}
+    build:
+      ignore_run_exports_from:
+       # This package needs the compiler for the tests, but the library
+       # does not link to libstdc++.so
+        - {{ compiler('cxx') }}
     run_exports:
       # changes soname at major versions, default settings OK
       # https://abi-laboratory.pro/tracker/timeline/expat/
