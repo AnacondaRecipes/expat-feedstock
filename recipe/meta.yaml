@@ -1,5 +1,5 @@
 {% set name = "expat" %}
-{% set version = "2.8.4" %}
+{% set version = "2.8.5" %}
 
 package:
   name: {{ name }}-split
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/lib{{ name }}/lib{{ name }}/releases/download/R_{{ version|replace(".", "_") }}/{{ name }}-{{ version }}.tar.bz2
-  sha256: 963250a823c16a498582b4ad82ad0f88926be0769675d3b6956be4d769a1cd8f
+  sha256: 952c03c33a6b337f12dae7a9b0f9dee86f867550d35c994d6bdaaddd37dc8454
 
 build:
   number: 0
@@ -22,14 +22,15 @@ requirements:
 
 outputs:
   - name: lib{{ name }}
+    build:
+      ignore_run_exports_from:
+       # This package needs the compiler for the tests, but the library
+       # does not link to libstdc++.so
+        - {{ compiler('cxx') }}
     run_exports:
       # changes soname at major versions, default settings OK
       # https://abi-laboratory.pro/tracker/timeline/expat/
       - {{ pin_subpackage('lib' + name) }}
-    ignore_run_exports_from:
-      # This package needs the compiler for the tests, but the library
-      # does not link to libstdc++.so
-      - {{ compiler('cxx') }}
     files:
       - include                  # [unix]
       - lib/libexpat.*           # [unix]
@@ -59,14 +60,15 @@ outputs:
         - if not exist %LIBRARY_BIN%\libexpat.dll exit 1          # [win]
 
   - name: {{ name }}
+    build:
+      ignore_run_exports_from:
+       # This package needs the compiler for the tests, but the library
+       # does not link to libstdc++.so
+        - {{ compiler('cxx') }}
     run_exports:
       # changes soname at major versions, default settings OK
       # https://abi-laboratory.pro/tracker/timeline/expat/
       - {{ pin_subpackage('lib' + name) }}
-    ignore_run_exports_from:
-      # This package needs the compiler for the tests, but the library
-      # does not link to libstdc++.so
-      - {{ compiler('cxx') }}
     files:
       - bin                   # [unix]
       - share/man             # [unix]
