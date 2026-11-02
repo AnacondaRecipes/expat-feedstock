@@ -22,14 +22,15 @@ requirements:
 
 outputs:
   - name: lib{{ name }}
-    ignore_run_exports_from:
-      # This package needs the compiler for the tests, but the library
-      # does not link to libstdc++.so
-      - {{ compiler('cxx') }}
-    run_exports:
-      # changes soname at major versions, default settings OK
-      # https://abi-laboratory.pro/tracker/timeline/expat/
-      - {{ pin_subpackage('lib' + name) }}
+    build:
+      ignore_run_exports_from:
+        # This package needs the compiler for the tests, but the library
+        # does not link to libstdc++.so
+        - {{ compiler('cxx') }}
+      run_exports:
+        # changes soname at major versions, default settings OK
+        # https://abi-laboratory.pro/tracker/timeline/expat/
+        - {{ pin_subpackage('lib' + name) }}
     files:
       - include                  # [unix]
       - lib/libexpat.*           # [unix]
@@ -59,14 +60,15 @@ outputs:
         - if not exist %LIBRARY_BIN%\libexpat.dll exit 1          # [win]
 
   - name: {{ name }}
-    ignore_run_exports_from:
-      # This package needs the compiler for the tests, but the library
-      # does not link to libstdc++.so
-      - {{ compiler('cxx') }}
-    run_exports:
-      # changes soname at major versions, default settings OK
-      # https://abi-laboratory.pro/tracker/timeline/expat/
-      - {{ pin_subpackage('lib' + name) }}
+    build:
+      ignore_run_exports_from:
+        # This package needs the compiler for the tests, but the library
+        # does not link to libstdc++.so
+        - {{ compiler('cxx') }}
+      run_exports:
+        # changes soname at major versions, default settings OK
+        # https://abi-laboratory.pro/tracker/timeline/expat/
+        - {{ pin_subpackage('lib' + name) }}
     files:
       - bin                   # [unix]
       - share/man             # [unix]
