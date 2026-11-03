@@ -1,5 +1,5 @@
 {% set name = "expat" %}
-{% set version = "2.9.0" %}
+{% set version = "2.10.0" %}
 
 package:
   name: {{ name }}-split
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/lib{{ name }}/lib{{ name }}/releases/download/R_{{ version|replace(".", "_") }}/{{ name }}-{{ version }}.tar.bz2
-  sha256: 775e8a68f81a748a401dc3168318d4a39484eb4f954726f21517c8f42c0ba984
+  sha256: 44e0139015f1c9908d0876b5516235136f16b14932d8f6634a16737a12742f53
 
 build:
   number: 0
@@ -22,14 +22,15 @@ requirements:
 
 outputs:
   - name: lib{{ name }}
-    ignore_run_exports_from:
-      # This package needs the compiler for the tests, but the library
-      # does not link to libstdc++.so
-      - {{ compiler('cxx') }}
-    run_exports:
-      # changes soname at major versions, default settings OK
-      # https://abi-laboratory.pro/tracker/timeline/expat/
-      - {{ pin_subpackage('lib' + name) }}
+    build:
+      ignore_run_exports_from:
+        # This package needs the compiler for the tests, but the library
+        # does not link to libstdc++.so
+        - {{ compiler('cxx') }}
+      run_exports:
+        # changes soname at major versions, default settings OK
+        # https://abi-laboratory.pro/tracker/timeline/expat/
+        - {{ pin_subpackage('lib' + name) }}
     files:
       - include                  # [unix]
       - lib/libexpat.*           # [unix]
@@ -59,14 +60,15 @@ outputs:
         - if not exist %LIBRARY_BIN%\libexpat.dll exit 1          # [win]
 
   - name: {{ name }}
-    ignore_run_exports_from:
-      # This package needs the compiler for the tests, but the library
-      # does not link to libstdc++.so
-      - {{ compiler('cxx') }}
-    run_exports:
-      # changes soname at major versions, default settings OK
-      # https://abi-laboratory.pro/tracker/timeline/expat/
-      - {{ pin_subpackage('lib' + name) }}
+    build:
+      ignore_run_exports_from:
+        # This package needs the compiler for the tests, but the library
+        # does not link to libstdc++.so
+        - {{ compiler('cxx') }}
+      run_exports:
+        # changes soname at major versions, default settings OK
+        # https://abi-laboratory.pro/tracker/timeline/expat/
+        - {{ pin_subpackage('lib' + name) }}
     files:
       - bin                   # [unix]
       - share/man             # [unix]
